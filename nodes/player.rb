@@ -5,6 +5,8 @@ class Player
   include Node
   include StateMachine
 
+  attr_reader :speed
+
   state_machine(
     states: {
       idle: Player::Idle,
@@ -16,6 +18,9 @@ class Player
   HAND_TILE = 120
 
   def initialize
+    @speed = 250
+    @attack_speed = 0.5
+
     @body_destination = Rectangle.new(
       240, 752,
       64, 64
@@ -31,6 +36,7 @@ class Player
   end
 
   def add_child_callback
+    shoot_bullet
   end
 
   def update(delta)
@@ -49,11 +55,36 @@ class Player
     )
   end
 
+  def move(direction, delta)
+    case direction
+    when :left
+      offset = -speed * delta
+    when :right
+      offset = speed * delta
+    end
+
+    @body_destination.x += offset
+    @hand_destination.x += offset
+
+    if @body_destination.x <= -32
+      @body_destination.x = -32
+      @hand_destination.x = -32
+    elsif @body_destination.x >= (480 - 32)
+      @body_destination.x = 480 - 32
+      @hand_destination.x = 480 - 32
+    end
+  end
+
   def idle
     transition_to :idle, self
   end
 
   def attack
     transition_to :attacking, self if @state.can_attack?
+  end
+
+  def shoot_bullet
+    puts "Shooting bullet"
+    add_child Delay.new(length: @attack_speed) { shoot_bullet }
   end
 end

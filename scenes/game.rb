@@ -15,5 +15,11 @@ class Game
   end
 
   def update(delta)
+
+    if $input.left_down?
+      @player.move :left, delta
+    elsif $input.right_down?
+      @player.move :right, delta
+    end
   end
 end
