@@ -5,6 +5,12 @@ class Game
     @player = Player.new
     add_child @player
 
+    add_child Spawner.new [
+      { type: :basic, column: 1, time: 3, args: [:normal] },
+      { type: :basic, column: 2, time: 4, args: [:normal] },
+      { type: :basic, column: 3, time: 5, args: [:normal] },
+    ]
+
     @map_destination = Rectangle.new(-16, -16, 64 * 8, 64 * 13)
   end
 

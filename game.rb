@@ -1,3 +1,21 @@
+# TODO:
+#
+# - Enemies
+#   - Basic
+#   - Moderate
+#   - Boss
+# - Waves (5)
+# - Audio
+#   - Intro
+#   - Shooting sound
+#   - Explosion
+#   - Music
+# - Title
+# - Credits
+# - Mobile input
+
+DEBUG = true
+
 # Add the path ./vendor so we can easily require third party libraries.
 $: << './vendor'
 
@@ -7,12 +25,16 @@ require 'rok-engine/extras'
 require 'lib/input'
 require 'lib/tilemap'
 
+require 'nodes/bullet'
 require 'nodes/player'
+require 'nodes/spawner'
+require 'nodes/enemy/basic'
 
 require 'scenes/game'
 
 # Open up a window
 init_window(480, 800, "Gladiators Only Love Fighting")
+set_window_state(FLAG_MSAA_4X_HINT)
 
 # Setup audio so we can play sounds
 init_audio_device
@@ -65,7 +87,13 @@ def main
     # Your drawing logic goes here
     clear
     $scene_manager.render
-    draw_fps(20, 20)
+
+    if DEBUG
+      draw_text(<<~STR, 20, 20, 20, PURPLE)
+        FPS: #{get_fps}
+        #{ObjectSpace.count_objects.map { |key, value| "#{key}: #{value.to_s}" }.join "\n" }
+      STR
+    end
   end
 end
 

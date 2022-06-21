@@ -84,7 +84,7 @@ class Player
   end
 
   def shoot_bullet
-    puts "Shooting bullet"
+    add_child Bullet.new(@body_destination.x + 32, :green)
     add_child Delay.new(length: @attack_speed) { shoot_bullet }
   end
 end
