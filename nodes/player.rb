@@ -36,7 +36,7 @@ class Player
   end
 
   def add_child_callback
-    shoot_bullet
+    add_child Delay.new(length: @attack_speed) { shoot_bullet }
   end
 
   def update(delta)
@@ -84,7 +84,9 @@ class Player
   end
 
   def shoot_bullet
-    add_child Bullet.new(@body_destination.x + 32, :green)
+    bullet = Bullet.new(@body_destination.x + 32, :green)
+    @parent.bullets << bullet
+    @parent.add_child bullet
     add_child Delay.new(length: @attack_speed) { shoot_bullet }
   end
 end

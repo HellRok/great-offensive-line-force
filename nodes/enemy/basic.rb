@@ -7,6 +7,7 @@ class Enemy
     TILE = 148
 
     def initialize(pattern)
+      @pattern = pattern
       @speed = 100
       @destination = Rectangle.new(
         0, 100,
@@ -26,7 +27,20 @@ class Enemy
     def update(delta)
       @destination.y += @speed * delta
 
+      case @pattern
+      when :sin
+        @destination.x += Math.sin(@destination.y / 20.0) * 3
+      end
+
       remove_self if @destination.y >= 660
+    end
+
+    def teardown
+      scene.enemies.delete(self)
+    end
+
+    def hit
+      remove_self
     end
   end
 end

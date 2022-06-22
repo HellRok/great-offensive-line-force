@@ -30,4 +30,21 @@ class Bullet
 
     remove_self if @destination.y <= -32
   end
+
+  def teardown
+    scene.bullets.delete(self)
+  end
+
+  def hit?(enemy)
+    enemy_position = Vector2.new(enemy.destination.x + 32, enemy.destination.y + 32)
+    bullet_position = Vector2.new(@destination.x + 32, @destination.y + 32)
+
+    if (enemy_position - bullet_position).length < 32
+      true
+    end
+  end
+
+  def hit
+    remove_self
+  end
 end

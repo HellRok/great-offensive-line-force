@@ -21,6 +21,7 @@ class Spawner
   def spawn(wave)
     enemy = klass_for(wave[:type]).new(*wave[:args])
     enemy.destination.x = wave[:column] * 64
+    @parent.enemies << enemy
     @parent.add_child enemy
   end
 
@@ -29,5 +30,9 @@ class Spawner
     when :basic
       Enemy::Basic
     end
+  end
+
+  def teardown
+    scene.enemies.delete(self)
   end
 end
