@@ -10,7 +10,7 @@ class Enemy
       @pattern = pattern
       @speed = 100
       @destination = Rectangle.new(
-        0, 100,
+        0, -64,
         64, 64
       )
       @origin = Vector2.new(32, 32)
@@ -29,7 +29,7 @@ class Enemy
 
       case @pattern
       when :sin
-        @destination.x += Math.sin(@destination.y / 20.0) * 3
+        @destination.x = @original_x_position + Math.sin(@destination.y / 20.0) * 64
       end
 
       remove_self if @destination.y >= 660
@@ -41,6 +41,11 @@ class Enemy
 
     def hit
       remove_self
+    end
+
+    def position=(x_position)
+      @original_x_position = x_position
+      @destination.x = x_position
     end
   end
 end

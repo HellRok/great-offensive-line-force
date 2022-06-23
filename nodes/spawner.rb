@@ -20,7 +20,7 @@ class Spawner
 
   def spawn(wave)
     enemy = klass_for(wave[:type]).new(*wave[:args])
-    enemy.destination.x = wave[:column] * 64
+    enemy.position = (wave[:column] * 64) - 16
     @parent.enemies << enemy
     @parent.add_child enemy
   end

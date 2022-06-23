@@ -12,11 +12,9 @@ class Game
     @player = Player.new
     add_child @player
 
-    add_child Spawner.new [
-      { type: :basic, column: 3, time: 1, args: [:sin] },
-      { type: :basic, column: 3, time: 1.25, args: [:sin] },
-      { type: :basic, column: 3, time: 1.5, args: [:sin] },
-    ]
+    add_child Wave.new 1 {
+      add_child Spawner.new WAVE_ONE
+    }
 
     @map_destination = Rectangle.new(-16, -16, 64 * 8, 64 * 13)
   end
@@ -24,7 +22,7 @@ class Game
   def render
     $map_base.draw(destination: @map_destination)
     $map_flavour.draw(destination: @map_destination)
-    $map_wall.draw(destination: @map_destination)
+    $map_wall_full.draw(destination: @map_destination)
   end
 
   def update(delta)
@@ -38,8 +36,8 @@ class Game
   end
 
   def check_collisions
-    @bullets.each { |bullet|
-      @enemies.each { |enemy|
+    @enemies.each { |enemy|
+      @bullets.each { |bullet|
         if bullet.hit? enemy
           bullet.hit
           enemy.hit

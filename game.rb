@@ -25,9 +25,16 @@ require 'rok-engine/extras'
 require 'lib/input'
 require 'lib/tilemap'
 
+require 'lib/wave_1'
+require 'lib/wave_2'
+require 'lib/wave_3'
+require 'lib/wave_4'
+require 'lib/wave_5'
+
 require 'nodes/bullet'
 require 'nodes/player'
 require 'nodes/spawner'
+require 'nodes/wave'
 require 'nodes/enemy/basic'
 
 require 'scenes/game'
@@ -67,13 +74,17 @@ $input = Input.new({
 
 $scene_manager = SceneManager.new(Game.new)
 
-map_base = File.read('./assets/map_Base.csv').each_line.map { |line| line.split(',').map(&:to_i) }
-map_flavour = File.read('./assets/map_Flavour.csv').each_line.map { |line| line.split(',').map(&:to_i) }
-map_wall = File.read('./assets/map_Wall.csv').each_line.map { |line| line.split(',').map(&:to_i) }
+map_base = File.read('./assets/map_base.csv').each_line.map { |line| line.split(',').map(&:to_i) }
+map_flavour = File.read('./assets/map_flavour.csv').each_line.map { |line| line.split(',').map(&:to_i) }
+map_wall_full = File.read('./assets/map_wall_full.csv').each_line.map { |line| line.split(',').map(&:to_i) }
+map_wall_some = File.read('./assets/map_wall_some.csv').each_line.map { |line| line.split(',').map(&:to_i) }
+map_wall_low = File.read('./assets/map_wall_low.csv').each_line.map { |line| line.split(',').map(&:to_i) }
 
 $map_base = $tilemap.generate_from(map_base).to_texture
 $map_flavour = $tilemap.generate_from(map_flavour).to_texture
-$map_wall = $tilemap.generate_from(map_wall).to_texture
+$map_wall_full = $tilemap.generate_from(map_wall_full).to_texture
+$map_wall_some = $tilemap.generate_from(map_wall_some).to_texture
+$map_wall_low = $tilemap.generate_from(map_wall_low).to_texture
 
 # Define your main method
 def main
