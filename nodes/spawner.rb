@@ -2,9 +2,10 @@ class Spawner
   include Node
 
   # [ { type: :basic, column: 1, time: 3, args: [:normal] } ]
-  def initialize(wave)
+  def initialize(wave, &block)
     @wave = wave
     @timer = 0
+    @block = block
   end
 
   def update(delta)
@@ -14,6 +15,13 @@ class Spawner
       if wave[:time] <= @timer
         spawn wave
         @wave.delete wave
+
+        if @wave.size.zero?
+          add_child Delay.new(length: 7) {
+            @block.call
+            remove_self
+          }
+        end
       end
     }
   end

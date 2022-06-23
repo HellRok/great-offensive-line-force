@@ -34,9 +34,11 @@ require 'lib/wave_5'
 require 'nodes/bullet'
 require 'nodes/player'
 require 'nodes/spawner'
+require 'nodes/wall'
 require 'nodes/wave'
 require 'nodes/enemy/basic'
 
+require 'scenes/defeat'
 require 'scenes/game'
 
 # Open up a window

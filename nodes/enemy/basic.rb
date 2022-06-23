@@ -31,8 +31,6 @@ class Enemy
       when :sin
         @destination.x = @original_x_position + Math.sin(@destination.y / 20.0) * 64
       end
-
-      remove_self if @destination.y >= 660
     end
 
     def teardown
