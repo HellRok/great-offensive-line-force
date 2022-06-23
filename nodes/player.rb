@@ -84,6 +84,7 @@ class Player
   end
 
   def shoot_bullet
+    $sounds.play(:shoot)
     bullet = Bullet.new(@body_destination.x + 32, :green)
     @parent.bullets << bullet
     @parent.add_child bullet

@@ -38,6 +38,8 @@ class Enemy
     end
 
     def hit
+      $sounds.play :explosion
+      scene.add_child Explosion.new(destination)
       remove_self
     end
 

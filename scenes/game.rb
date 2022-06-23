@@ -18,6 +18,9 @@ class Game
     wave_1
 
     @map_destination = Rectangle.new(-16, -16, 64 * 8, 64 * 13)
+
+    $sounds.background_music.play
+    $sounds.background_music.volume = 0.3
   end
 
   def render
@@ -45,8 +48,11 @@ class Game
       }
 
       if enemy.destination.y >= 660
+        enemy.destination.y += 16
+        add_child Explosion.new(enemy.destination)
         remove_child enemy
         @wall.health -= 1
+        $sounds.play(:hurt)
         if @wall.health <= 0
           children.each(&:pause)
           add_child FadeOut.new(2) {

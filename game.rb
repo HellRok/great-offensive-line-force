@@ -25,6 +25,7 @@ require 'rok-engine/extras'
 require 'lib/input'
 require 'lib/tilemap'
 
+require 'lib/sound_manager'
 require 'lib/wave_1'
 require 'lib/wave_2'
 require 'lib/wave_3'
@@ -32,6 +33,7 @@ require 'lib/wave_4'
 require 'lib/wave_5'
 
 require 'nodes/bullet'
+require 'nodes/explosion'
 require 'nodes/player'
 require 'nodes/spawner'
 require 'nodes/wall'
@@ -74,6 +76,7 @@ $input = Input.new({
   },
 })
 
+$sounds = SoundManager.new
 $scene_manager = SceneManager.new(Game.new)
 
 map_base = File.read('./assets/map_base.csv').each_line.map { |line| line.split(',').map(&:to_i) }
@@ -94,6 +97,7 @@ def main
   delta = get_frame_time
 
   # Your update logic goes here
+  $sounds.tick(delta)
   $scene_manager.update(delta)
 
   drawing do

@@ -15,6 +15,11 @@ class Defeat
         puts "LOL"
       }
     }
+    $sounds.play(:defeat)
+    add_child Delay.new(length: 1) { $sounds.play(:defeat) }
+    add_child Delay.new(length: 2) { $sounds.play(:defeat) }
+    add_child Delay.new(length: 3) { $sounds.play(:defeat) }
+    add_child Delay.new(length: 4) { $sounds.play(:defeat) }
   end
 
   def render
