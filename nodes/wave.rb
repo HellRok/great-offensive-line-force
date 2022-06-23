@@ -2,7 +2,11 @@ class Wave
   include Node
 
   def initialize(count, &block)
-    @texture = Texture2D.load("./assets/wave_#{count}.png")
+    if count == '?'
+      @texture = Texture2D.load("./assets/oh_no.png")
+    else
+      @texture = Texture2D.load("./assets/wave_#{count}.png")
+    end
 
     @hidden = false
 
@@ -16,7 +20,7 @@ class Wave
     add_child Delay.new(length: 1.5) { @hidden = !@hidden }
     add_child Delay.new(length: 2.0) { @hidden = !@hidden }
     add_child Delay.new(length: 2.5) {
-      block.call
+      block.call if block_given?
       remove_self
     }
   end

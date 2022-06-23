@@ -8,10 +8,10 @@ class Bullet
     113,
   ]
 
-  def initialize(x_position, colour)
+  def initialize(x_position, colour, y_position = 700)
     @speed = 300
     @destination = Rectangle.new(
-      x_position, 700,
+      x_position, y_position,
       64, 64
     )
     @origin = Vector2.new(32, 32)

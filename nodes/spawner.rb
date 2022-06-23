@@ -17,7 +17,7 @@ class Spawner
         @wave.delete wave
 
         if @wave.size.zero?
-          add_child Delay.new(length: 7) {
+          add_child Delay.new(length: 8) {
             @block.call
             remove_self
           }

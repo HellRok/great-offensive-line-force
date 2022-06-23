@@ -13,7 +13,7 @@ class Wall
       $map_wall_full.draw(destination: @destination)
     elsif @health > 3
       $map_wall_some.draw(destination: @destination)
-    elsif @health > 0
+    elsif @health > 1
       $map_wall_low.draw(destination: @destination)
     end
   end

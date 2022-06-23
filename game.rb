@@ -26,6 +26,7 @@ require 'lib/input'
 require 'lib/tilemap'
 
 require 'lib/sound_manager'
+require 'lib/theme'
 require 'lib/wave_1'
 require 'lib/wave_2'
 require 'lib/wave_3'
@@ -33,6 +34,7 @@ require 'lib/wave_4'
 require 'lib/wave_5'
 
 require 'nodes/bullet'
+require 'nodes/button'
 require 'nodes/explosion'
 require 'nodes/player'
 require 'nodes/spawner'
@@ -42,6 +44,8 @@ require 'nodes/enemy/basic'
 
 require 'scenes/defeat'
 require 'scenes/game'
+require 'scenes/menu'
+require 'scenes/victory'
 
 # Open up a window
 init_window(480, 800, "Gladiators Only Love Fighting")
@@ -77,7 +81,7 @@ $input = Input.new({
 })
 
 $sounds = SoundManager.new
-$scene_manager = SceneManager.new(Game.new)
+$scene_manager = SceneManager.new(Menu.new)
 
 map_base = File.read('./assets/map_base.csv').each_line.map { |line| line.split(',').map(&:to_i) }
 map_flavour = File.read('./assets/map_flavour.csv').each_line.map { |line| line.split(',').map(&:to_i) }
