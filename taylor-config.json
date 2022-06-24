@@ -1,6 +1,6 @@
 {
-  "name": "gladiators-only-love-fighting",
-  "version": "v0.0.1",
+  "name": "great-offensive-line-force",
+  "version": "v1.0.0",
   "input": "game.rb",
   "export_directory": "./exports",
   "export_targets": [
