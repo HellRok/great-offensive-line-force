@@ -49,6 +49,15 @@ class Game
       @player.move :left, delta
     elsif $input.right_down?
       @player.move :right, delta
+    elsif mouse_button_down?(MOUSE_LEFT_BUTTON)
+      # This is a bit of a dodgy trick, but basically tapping acts as a mouse
+      # click, but doesn't give the position, so let's just pretend it was a
+      # tap and act accordingly
+      if get_touch_position(0).x < 240
+        @player.move :left, delta
+      else
+        @player.move :right, delta
+      end
     end
 
     check_collisions
