@@ -60,6 +60,8 @@ class Menu
     @wall = Wall.new
     add_child @wall
     @map_destination = Rectangle.new(-16, -16, 64 * 8, 64 * 13)
+
+    add_child(FadeIn.new(0.5){})
   end
 
   def render

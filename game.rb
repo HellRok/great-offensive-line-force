@@ -55,6 +55,7 @@ require 'nodes/enemy/basic'
 require 'scenes/defeat'
 require 'scenes/game'
 require 'scenes/menu'
+require 'scenes/taylor_splash'
 require 'scenes/victory'
 
 $tilemap = Tilemap.new(
@@ -81,7 +82,7 @@ $input = Input.new({
 })
 
 $sounds = SoundManager.new
-$scene_manager = SceneManager.new(Menu.new)
+$scene_manager = SceneManager.new(TaylorSplash.new)
 
 map_base = File.read('./assets/map_base.csv').each_line.map { |line| line.split(',').map(&:to_i) }
 map_flavour = File.read('./assets/map_flavour.csv').each_line.map { |line| line.split(',').map(&:to_i) }
