@@ -3,7 +3,7 @@ class Spawner
 
   # [ { type: :basic, column: 1, time: 3, args: [:normal] } ]
   def initialize(wave, &block)
-    @wave = wave
+    @wave = wave.dup
     @timer = 0
     @block = block
   end

@@ -14,10 +14,20 @@
 # - Credits
 # - Mobile input
 
-DEBUG = true
+DEBUG = false
 
 # Add the path ./vendor so we can easily require third party libraries.
 $: << './vendor'
+#
+# Open up a window
+init_window(480, 800, "Gladiators Only Love Fighting")
+set_window_state(FLAG_MSAA_4X_HINT)
+
+# Setup audio so we can play sounds
+init_audio_device
+
+# Get the current monitor frame rate and set our target framerate to match.
+set_target_fps(get_monitor_refresh_rate(get_current_monitor))
 
 require 'rok-engine/core'
 require 'rok-engine/extras'
@@ -46,16 +56,6 @@ require 'scenes/defeat'
 require 'scenes/game'
 require 'scenes/menu'
 require 'scenes/victory'
-
-# Open up a window
-init_window(480, 800, "Gladiators Only Love Fighting")
-set_window_state(FLAG_MSAA_4X_HINT)
-
-# Setup audio so we can play sounds
-init_audio_device
-
-# Get the current monitor frame rate and set our target framerate to match.
-set_target_fps(get_monitor_refresh_rate(get_current_monitor))
 
 $tilemap = Tilemap.new(
   image: Image.load('./assets/tilesheet.png'),

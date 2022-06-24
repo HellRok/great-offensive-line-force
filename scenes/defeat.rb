@@ -10,16 +10,15 @@ class Defeat
   end
 
   def setup
-    add_child FadeIn.new(2) {
-      add_child Delay.new(length: 3) {
-        puts "LOL"
-      }
-    }
+    add_child FadeIn.new(2) { }
     $sounds.play(:defeat)
     add_child Delay.new(length: 1) { $sounds.play(:defeat) }
     add_child Delay.new(length: 2) { $sounds.play(:defeat) }
     add_child Delay.new(length: 3) { $sounds.play(:defeat) }
     add_child Delay.new(length: 4) { $sounds.play(:defeat) }
+    add_child Delay.new(length: 5) {
+      $scene_manager.switch_to(Menu.new)
+    }
   end
 
   def render

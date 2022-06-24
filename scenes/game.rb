@@ -3,9 +3,10 @@ class Game
 
   attr_accessor :bullets, :enemies
 
-  def initialize
+  def initialize(wave)
     @bullets = []
     @enemies = []
+    @wave = wave
   end
 
   def setup
@@ -15,12 +16,27 @@ class Game
     @wall = Wall.new
     add_child @wall
 
-    wave_1
-
     @map_destination = Rectangle.new(-16, -16, 64 * 8, 64 * 13)
 
     $sounds.background_music.play
     $sounds.background_music.volume = 0.3
+
+    add_child FadeIn.new(0.5) {
+      case @wave
+      when 1
+        wave_1
+      when 2
+        wave_2
+      when 3
+        wave_3
+      when 4
+        wave_4
+      when 5
+        wave_5
+      else
+        wave_1
+      end
+    }
   end
 
   def render

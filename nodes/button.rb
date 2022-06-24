@@ -29,7 +29,7 @@ class Button
       @text,
       position: @text_position,
       size: Theme::FONT.base_size,
-      colour: Theme::Colour::PRIMARY
+      colour: Theme::Colour::TERTIARY
     )
   end
 
