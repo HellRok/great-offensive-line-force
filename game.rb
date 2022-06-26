@@ -20,7 +20,7 @@ DEBUG = false
 $: << './vendor'
 #
 # Open up a window
-init_window(480, 800, "Gladiators Only Love Fighting")
+init_window(480, 800, "Great Offensive Line Force")
 set_window_state(FLAG_MSAA_4X_HINT)
 
 # Setup audio so we can play sounds
